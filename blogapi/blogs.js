@@ -80,27 +80,29 @@ router.get("/:blogId",async (req,resp)=>{
 })
 
 router.put("/:blogId",async(req,resp)=>{
-    const {title, description,categoryId} = req.body
-    console.log(categoryId)
+    const {title, description,categoryId} = req.body;
+    let count;
     try{
         // check if the new categoryId is a valid and existing categoryId, if not reject update
-        const count = await countCategoryById(categoryId)
-        if (count == 1){
-            const blog = await blogModel.findOne({_id:req.params.blogId})
-            blog.title = title ? title : blog.title
-            blog.description = description ? description : blog.description
-            blog.category = categoryId ? categoryId : blog.category
-            blog.save()
-            const populatedRes = await blog.populate("category","categoryName")
-            if (populatedRes){
-                const { _id, title, description, category } = populatedRes;
-                const simplifiedPopulatedRes = {_id,title,description,category:category.categoryName}
-                resp.json({"status":"Blog Updated Successfully",updatedBlog:simplifiedPopulatedRes})
-    
-            }
-        }else{
-            resp.status(400).json({"status":"failed","message":"Invalid categoryId detected"})
-        }      
+        count = await countCategoryById(categoryId)
+        if (categoryId && count == 0){
+            return resp.status(400).json({"status":"failed","message":"Invalid categoryId detected"})
+        }
+
+        const blog = await blogModel.findOne({_id:req.params.blogId})
+        blog.title = title ? title : blog.title
+        blog.description = description ? description : blog.description
+        blog.category = (categoryId) ? categoryId : blog.category
+        blog.save()
+
+        // makes category:<category_name> instead of category:{_id:<id>,categoryName:<category_name>}
+        const populatedRes = await blog.populate("category","categoryName")
+        if (populatedRes){
+            const { _id, title, description, category } = await populatedRes;
+            const simplifiedPopulatedRes = {_id,title,description,category:category.categoryName}
+            resp.json({"status":"Blog Updated Successfully",updatedBlog:simplifiedPopulatedRes})
+
+        }   
         
     }catch(err){
         resp.status(500).json({"status":"failed","message":err})
