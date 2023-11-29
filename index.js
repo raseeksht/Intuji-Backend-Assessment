@@ -4,12 +4,18 @@ const {blogModel} = require("./models")
 const api = require("./blogapi/api")
 
 // connection with mongodb
+if (process.env.devServer){
+    var uri = "mongodb://127.0.0.1:27017/intujiBackend"
+}else{
+    var uri = process.env.mongoUri
+}
 
-mongoose.connect("mongodb://127.0.0.1:27017/intujiBackend").then(()=>{
+mongoose.connect(uri).then(()=>{
     console.log("connected with mongoose")
 }).catch((err)=>{
     console.log("Error connecting with mongodb")
 })
+
 
 
 const app = express()
