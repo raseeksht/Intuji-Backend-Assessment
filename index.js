@@ -26,6 +26,9 @@ app.use("/api",api)
 const html = `<h1>Intuji Backend Assessment</h1>
 <h3>Blog API</h3>
 <div>Api documentation: <a href="https://documenter.getpostman.com/view/26416014/2s9YeHZW6U#648236f5-a42b-40fe-84c8-5ac55351b201" target="_blank">https://documenter.getpostman.com/view/26416014/2s9YeHZW6U#648236f5-a42b-40fe-84c8-5ac55351b201</a></div>
+<br>
+<div>Postman Collection: <a href="https://www.postman.com/bold-meadow-973460/workspace/intuji/example/26416014-75e83ad9-8c46-4738-b88b-aeff7dd2b68f" target="_blank">https://www.postman.com/bold-meadow-973460/workspace/intuji/example/26416014-75e83ad9-8c46-4738-b88b-aeff7dd2b68f</a> </div>
+<br>
 <div>Github Source Code: <a href="https://github.com/raseeksht/Intuji-Backend-Assessment" target="_blank">https://github.com/raseeksht/Intuji-Backend-Assessment</a></div>
 
 <h4>Api Endpoints</h4>
