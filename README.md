@@ -4,6 +4,8 @@
 
 API documentaion available at: https://documenter.getpostman.com/view/26416014/2s9YeHZW6U#367f19df-bdbe-4361-9a4f-85762e24a447
 
+Postman Collection: https://www.postman.com/bold-meadow-973460/workspace/intuji/example/26416014-75e83ad9-8c46-4738-b88b-aeff7dd2b68f
+
 
 ## Q2. finding pair with given sum in an array
 
